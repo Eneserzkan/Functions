@@ -1,0 +1,175 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNZTEsQWoYFv34FRVPjvjff",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Eneserzkan/Functions/blob/main/Automation%20Roadmap-Functions\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 18,
+      "metadata": {
+        "id": "sZP3GQh4mU_B",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "31e69465-3ecd-4a73-ef2b-b27e55777c3c"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Minimum Sayıyı Giriniz: 10\n",
+            "Maximum Sayıyı Giriniz: 210\n",
+            "Bölen Sayıyı Giriniz: 10\n",
+            "[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]\n"
+          ]
+        }
+      ],
+      "source": [
+        "def bolunen_sayi_bulma():\n",
+        "  min_sayi = int(input(\"Minimum Sayıyı Giriniz: \"))\n",
+        "  max_sayi = int(input(\"Maximum Sayıyı Giriniz: \"))\n",
+        "  bolen_sayi = int(input(\"Bölen Sayıyı Giriniz: \"))\n",
+        "\n",
+        "  tam_bolunenler = []\n",
+        "  for i in range(min_sayi, max_sayi):\n",
+        "    if i % bolen_sayi == 0:\n",
+        "      tam_bolunenler.append(i)\n",
+        "\n",
+        "  return tam_bolunenler\n",
+        "\n",
+        "print(bolunen_sayi_bulma())"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "birler =  [\"\",\"Bir\",\"İki\",\"Üç\",\"Dört\",\"Beş\",\"Altı\",\"Yedi\",\"Sekiz\",\"Dokuz\"]\n",
+        "onlar = [\"\",\"On\",\"Yirmi\",\"Otuz\",\"Kırk\",\"Elli\",\"Altmış\",\"Yetmiş\",\"Seksen\",\"Doksan\"]\n",
+        "\n",
+        "def okunus(sayı):\n",
+        "    birinci = sayı % 10\n",
+        "    ikinci = sayı // 10\n",
+        "    \n",
+        "    return onlar[ikinci] + \" \" + birler[birinci]\n",
+        "\n",
+        "    \n",
+        "sayı =  int(input(\"Sayı:\"))\n",
+        "\n",
+        "print(okunus(sayı))\n",
+        "\n",
+        "  "
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "9nUORcDvqhNr",
+        "outputId": "e6168f2f-a16b-4d3a-dd12-3a3b8d070486"
+      },
+      "execution_count": 40,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Sayı:50\n",
+            "Elli \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "df = pd.DataFrame(columns = [\"Ad\",\"Soyad\",\"Okul No\",\"Ders\",\"Vize\",\"Final\",\"Ortalama\",\"Harf Puanı\",\"Ders Durumu\"])\n",
+        "\n",
+        "def HarfPuanı(sınav_puanı):\n",
+        "    result = \"\"\n",
+        "    if(90<=sınav_puanı<=100):\n",
+        "        result = \"AA\"\n",
+        "    elif(80<=sınav_puanı<90):\n",
+        "        result = \"AB\"\n",
+        "    elif(70<=sınav_puanı<80):\n",
+        "        result = \"BB\"\n",
+        "    elif(60<=sınav_puanı<70):\n",
+        "        result = \"CC\"\n",
+        "    elif(50<=sınav_puanı<60):\n",
+        "        result = \"DD\"\n",
+        "    elif(0<=sınav_puanı<50):\n",
+        "        result = \"FF\"\n",
+        "    else:\n",
+        "        result = \"\"\n",
+        "    return result\n",
+        "\n",
+        "def DersDurumu(sınav_puanı):\n",
+        "    result = \"\"\n",
+        "    if(sınav_puanı>=50):\n",
+        "        result = \"Geçti\"\n",
+        "        \n",
+        "    elif(0<=sınav_puanı<50):\n",
+        "        result = \"Kaldı\"\n",
+        "        \n",
+        "    else:\n",
+        "        result = \"\"\n",
+        "        \n",
+        "    return result\n",
+        "\n",
+        "while True:\n",
+        "    \n",
+        "    ad = input(\"Adı gir(Çıkış için q`ye bas)\")\n",
+        "    if ad == \"q\":\n",
+        "        df.to_csv(\"OgrenciNotlari.csv\")\n",
+        "        break\n",
+        "    soyad = input(\"Soyadı gir\")\n",
+        "    okul_no = input(\"Okul No gir\")\n",
+        "    ders = input(\"Dersi gir\")\n",
+        "    vize = int(input(\"Vize Notunu Gir\"))\n",
+        "    final = int(input(\"Final Notunu Gir\"))\n",
+        "    ortalama = vize*(0.4) + final*(0.6)\n",
+        "    harf = HarfPuanı(ortalama)\n",
+        "    ders_durumu = DersDurumu(ortalama)\n",
+        "    \n",
+        "    \n",
+        "    dictionary = {}\n",
+        "    bilgiler = list(df.columns)\n",
+        "    liste = [ad,soyad,okul_no,ders,vize,final,ortalama,harf,ders_durumu]\n",
+        "    for i in range(len(liste)):\n",
+        "        dictionary[bilgiler[i]] = liste[i]\n",
+        "    df = df.append(dictionary,ignore_index = True)\n",
+        "\n",
+        "    df"
+      ],
+      "metadata": {
+        "id": "EyYLMQNHtXXj"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
