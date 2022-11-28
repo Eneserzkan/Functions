@@ -1,1 +1,97 @@
+@Enes Erözkan 
 
+# 1. soru
+
+def bolunen_sayi_bulma():
+  min_sayi = int(input("Minimum Sayıyı Giriniz: "))
+  max_sayi = int(input("Maximum Sayıyı Giriniz: "))
+  bolen_sayi = int(input("Bölen Sayıyı Giriniz: "))
+
+  tam_bolunenler = []
+  for i in range(min_sayi, max_sayi):
+    if i % bolen_sayi == 0:
+      tam_bolunenler.append(i)
+
+  return tam_bolunenler
+
+print(bolunen_sayi_bulma())
+
+
+# 2. soru
+
+birler =  ["","Bir","İki","Üç","Dört","Beş","Altı","Yedi","Sekiz","Dokuz"]
+onlar = ["","On","Yirmi","Otuz","Kırk","Elli","Altmış","Yetmiş","Seksen","Doksan"]
+
+def okunus(sayı):
+    birinci = sayı % 10
+    ikinci = sayı // 10
+    
+    return onlar[ikinci] + " " + birler[birinci]
+
+    
+sayı =  int(input("Sayı:"))
+
+print(okunus(sayı))
+
+
+# 3. soru
+
+import pandas as pd
+
+df = pd.DataFrame(columns = ["Ad","Soyad","Okul No","Ders","Vize","Final","Ortalama","Harf Puanı","Ders Durumu"])
+
+def HarfPuanı(sınav_puanı):
+    result = ""
+    if(90<=sınav_puanı<=100):
+        result = "AA"
+    elif(80<=sınav_puanı<90):
+        result = "AB"
+    elif(70<=sınav_puanı<80):
+        result = "BB"
+    elif(60<=sınav_puanı<70):
+        result = "CC"
+    elif(50<=sınav_puanı<60):
+        result = "DD"
+    elif(0<=sınav_puanı<50):
+        result = "FF"
+    else:
+        result = ""
+    return result
+
+def DersDurumu(sınav_puanı):
+    result = ""
+    if(sınav_puanı>=50):
+        result = "Geçti"
+        
+    elif(0<=sınav_puanı<50):
+        result = "Kaldı"
+        
+    else:
+        result = ""
+        
+    return result
+
+while True:
+    
+    ad = input("Adı gir(Çıkış için q`ye bas)")
+    if ad == "q":
+        df.to_csv("OgrenciNotlari.csv")
+        break
+    soyad = input("Soyadı gir")
+    okul_no = input("Okul No gir")
+    ders = input("Dersi gir")
+    vize = int(input("Vize Notunu Gir"))
+    final = int(input("Final Notunu Gir"))
+    ortalama = vize*(0.4) + final*(0.6)
+    harf = HarfPuanı(ortalama)
+    ders_durumu = DersDurumu(ortalama)
+    
+    
+    dictionary = {}
+    bilgiler = list(df.columns)
+    liste = [ad,soyad,okul_no,ders,vize,final,ortalama,harf,ders_durumu]
+    for i in range(len(liste)):
+        dictionary[bilgiler[i]] = liste[i]
+    df = df.append(dictionary,ignore_index = True)
+
+    df
